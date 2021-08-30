@@ -1,3 +1,3 @@
 ## Tax-cal
-1.A Pay As You Earn tax calculator
-2.Tax Rates from Ghana Revenue Authority
+* A Pay As You Earn tax calculator
+* Tax Rates from Ghana Revenue Authority
