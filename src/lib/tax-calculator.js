@@ -1,9 +1,9 @@
 const TAX_TABLE = [
-[288,0],
+[319,0],
 [100,5],
-[140,10],
+[120,10],
 [3000,17.5],
-[16472,25],
+[16461,25],
 [Number.POSITIVE_INFINITY, 30]
 ]
 const SSNIT = 5.5/100;
@@ -28,7 +28,7 @@ function computeTax(table,income, allowance){
   totalTax =0,
   taxSteps=[];
     if(taxableIncome > 0){
-    for(var row=0; row< table.length; row++){
+    for(var row=0; row < table.length; row++){
         var [taxableAmount, taxRate]= table[row],
         taxable = (taxableIncome > taxableAmount)
         ? taxableAmount : taxableIncome;
