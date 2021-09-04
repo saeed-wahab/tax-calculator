@@ -1,19 +1,28 @@
-import React,{ useEffect } from "react";
+import React from "react";
 import { useForm } from "react-hook-form";
+import * as yup from "yup";
+import { yupResolver } from '@hookform/resolvers/yup'
 import Button from "./Button";
 import TextField from "./TextField";
 import CalculatorOption from "./CalculatorOption";
-import {useTaxData} from "../reducer/index";
+import { useTaxData } from "../reducer/index";
 import { 
-    setAllowanceToZero, 
-    setGrossToZero,
     setGrossValue,
     setAllowanceValue,
 } from "../reducer/actions";
 
 function Form(props){
     const [state, dispatch ] = useTaxData();
-    const {handleSubmit, register} = useForm();
+
+
+    const schema = yup.object().shape({
+        gross_salary:yup.number().required().min(0),
+        allowance:yup.number().min(0)
+    });
+
+    const { register, handleSubmit, formState:{ errors } } = useForm({
+        resolver:yupResolver(schema),
+    });
 
     const onChange=({name,value})=>{
        
@@ -30,29 +39,31 @@ function Form(props){
     }
 
     const onSubmit= (data)=> {
-      
-        console.log(JSON.stringify(data))
-
+        const { gross_salary, allowance} = data;
+        console.log(gross_salary);
+        console.log(allowance);
     }
-    useEffect(()=>{
-        if(state.grossInput <0){
-            dispatch(setGrossToZero());
-        }
-
-        if(state.allowanceInput < 0){
-            dispatch(setAllowanceToZero());
-        }
-
-    },[state.grossInput, state.allowanceInput, dispatch]);
+    
 
     return(
         <form onSubmit={handleSubmit(onSubmit)}>
             <label className="label">Gross Salary</label>
-            <TextField register={register} name="gross_salary"  onChange={onChange}  />
+            <TextField 
+                register={register} 
+                name="gross_salary"  
+                onChange={onChange}
+                error={errors.gross_salary}  
+            />
 
             <label  className="label">Allowance(optional)</label>
-            <TextField register={register} name="allowance" value={state.allowanceInput} onChange={onChange}/>
- 
+            <TextField 
+                register={register} 
+                name="allowance" 
+                value={state.allowanceInput}
+                error={errors.allowance} 
+                onChange={onChange}
+            />
+            
             <label className="label">Calculate for : </label>
             <CalculatorOption />
             <p><Button type="sumbit" >Calculate</Button></p>
