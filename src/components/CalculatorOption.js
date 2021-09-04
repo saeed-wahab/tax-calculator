@@ -3,11 +3,13 @@ import React from "react";
 function CalculatorOption(){
     return(
         <div className="control">
-            <label class="radio">
-                <input type="radio" name="monthly" />
+            <label className="radio">
+                <input type="radio" name="cal_type"  value="monthly"/>
+                Monthly
             </label>
-            <label class="radio">
-                <input type="radio" name="yearly" />
+            <label className="radio">
+                <input type="radio" name="cal_type" value="yearly" />
+                Yearly
             </label>
         </div>
     )

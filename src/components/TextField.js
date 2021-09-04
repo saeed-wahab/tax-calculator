@@ -1,13 +1,20 @@
 import React from "react";
 
-function TextField(props){
+function TextField({name, value,onChange, register}){
+   
     return(
         <div className="field has-addons">
             <p className="control">
-            <a class="button is-static"> GHC </a>
+            <button className="button is-static"> GHS </button>
             </p>    
             <p className="control">
-                <input class="input is-primary" name={props.name} type="number" />
+                <input 
+                    className="input is-primary"  
+                    type="number" 
+                    defaultValue={0}
+                    onChange={(e)=>onChange(e.target)}
+                    {...register(name,{require:true, maxLength:9, min:0})}
+                />
             </p>
         </div>
     )
