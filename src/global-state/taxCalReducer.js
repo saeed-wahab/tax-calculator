@@ -3,6 +3,7 @@ import taxCalculator from "../lib/tax-calculator";
 
 function taxCalReducer(state, {type, payload}){
     
+    
     switch(type) {
         case CALCULATE_TAX:
             const {grossSalary, allowance} = payload;
