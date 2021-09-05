@@ -4,44 +4,28 @@ import * as yup from "yup";
 import { yupResolver } from '@hookform/resolvers/yup'
 import Button from "./Button";
 import TextField from "./TextField";
-import CalculatorOption from "./CalculatorOption";
-import { useTaxData } from "../reducer/index";
 import { 
-    setGrossValue,
-    setAllowanceValue,
-} from "../reducer/actions";
+    calculateTax,
+} from "../global-state/actions";
+import { useDispatch } from "../global-state";
 
 function Form(props){
-    const [state, dispatch ] = useTaxData();
-
-
+    const dispatch = useDispatch();
     const schema = yup.object().shape({
         gross_salary:yup.number().required().min(0),
         allowance:yup.number().min(0)
     });
-
+    
     const { register, handleSubmit, formState:{ errors } } = useForm({
-        resolver:yupResolver(schema),
+        resolver:yupResolver(schema)
     });
 
-    const onChange=({name,value})=>{
-       
-        switch (name) {
-            case 'gross_salary':
-                dispatch(setGrossValue(value))
-                break;
-            case 'allowance':
-                dispatch(setAllowanceValue(value))
-                break;
-            default:
-                break;
-        }
-    }
+    
 
-    const onSubmit= (data)=> {
-        const { gross_salary, allowance} = data;
-        console.log(gross_salary);
-        console.log(allowance);
+    const onSubmit= ({ gross_salary, allowance})=> {
+        const salary = parseFloat(gross_salary);
+        const alloWance = parseFloat(allowance);
+        dispatch(calculateTax(salary,alloWance));
     }
     
 
@@ -51,7 +35,6 @@ function Form(props){
             <TextField 
                 register={register} 
                 name="gross_salary"  
-                onChange={onChange}
                 error={errors.gross_salary}  
             />
 
@@ -59,14 +42,12 @@ function Form(props){
             <TextField 
                 register={register} 
                 name="allowance" 
-                value={state.allowanceInput}
                 error={errors.allowance} 
-                onChange={onChange}
+
             />
             
             <label className="label">Calculate for : </label>
-            <CalculatorOption />
-            <p><Button type="sumbit" >Calculate</Button></p>
+            <p><Button>Calculate</Button></p>
         </form>
     )
 }

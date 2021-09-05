@@ -14,7 +14,7 @@ function taxCalculator(salary,allowance){
   const  ssnit = salary * SSNIT;
   const taxableIncome = (salary + allowance) - ssnit;
   return {
-  ssnitDeduction: ssnit,
+  ssnit: ssnit,
   ...computeTax(TAX_TABLE,taxableIncome),
   }
 
@@ -41,7 +41,7 @@ function computeTax(table, income, allowance){
     } 
     return {
       netIncome: (income - totalTax),
-      taxDeduction:totalTax,
+      taxDeducted:totalTax,
       graduatedTaxRate:taxSteps,
     }
 }

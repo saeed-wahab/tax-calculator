@@ -2,7 +2,7 @@ import React from "react";
 
 function Button(props){
     return(
-       <button type={props.type}
+       <button type={"submit"}
         className="button is-primary"> 
             {props.children}
        </button> 

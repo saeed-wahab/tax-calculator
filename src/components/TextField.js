@@ -1,6 +1,6 @@
 import React from "react";
 
-function TextField({name, value,onChange, register, error}){
+function TextField({name,register, error}){
    
     return(
         <div className="field has-addons">
@@ -12,8 +12,7 @@ function TextField({name, value,onChange, register, error}){
                     className="input is-primary"  
                     type="number" 
                     defaultValue={0}
-                    onChange={(e)=>onChange(e.target)}
-                    {...register(name,{maxLength:9, min:0})}
+                    {...register(name)}
                 />
                 { (error) ? (<span className="help is-danger">Incorrect input </span>): null }
             </p>
