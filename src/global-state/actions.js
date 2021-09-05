@@ -42,7 +42,6 @@ export function setAllowanceValue(value){
 }
 
 export function calculateTax(grossSalary,allowance=0){
-    console.log("calculate")
     return({
         type:CALCULATE_TAX,
         payload:{grossSalary, allowance},
