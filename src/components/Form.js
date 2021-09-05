@@ -31,14 +31,14 @@ function Form(props){
 
     return(
         <form onSubmit={handleSubmit(onSubmit)}>
-            <label className="label">Gross Salary</label>
+            <label className="label">Enter Gross Salary(monthly)</label>
             <TextField 
                 register={register} 
                 name="gross_salary"  
                 error={errors.gross_salary}  
             />
 
-            <label  className="label">Allowance(optional)</label>
+            <label  className="label">Enter Allowance(optional)</label>
             <TextField 
                 register={register} 
                 name="allowance" 

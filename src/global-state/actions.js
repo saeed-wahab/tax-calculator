@@ -1,4 +1,3 @@
-import taxCalculator from "../lib/tax-calculator";
 import { 
     CALCULATE_TAX, 
     SHOW_GRADUATED_RATE,

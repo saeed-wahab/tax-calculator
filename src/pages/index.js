@@ -9,15 +9,19 @@ function LandingPage(){
     const tax  = selectTax(state);
     const ssnit  = selectSsnit(state);
     const income = selectIncome(state)
+    const taxTable= selectTaxTable(state);
     return(
-        <div>
-           <Form />
+        <div className="box">
+            <h1 className="title">TAX Calculator(<abbr title="Pay As you Earn">PAYE</abbr>)</h1>
+           <Form /><br/>
            <ul>
                <li>SSNIT: {ssnit}</li>
+               <li>Total Tax(to be paid) : {tax}</li>
                <li>Net Salary: {income}</li>
-               {console.log(selectTaxTable(state))}
+              
+
            </ul>
-           <Table list={selectTaxTable(state)} tax={selectTax(state)}/>
+           <Table list={taxTable} tax={tax}/>
         </div>
     )
 }
