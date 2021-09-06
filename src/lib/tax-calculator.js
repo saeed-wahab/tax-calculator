@@ -34,7 +34,14 @@ function computeTax(table, income, allowance){
               ? taxableAmount : taxableIncome;
 
               var trancheTax = (taxable * taxRate)/100;
-              if(taxable) taxSteps.push({chargeable:taxable.toFixed(2), rate:taxRate, tax:trancheTax.toFixed(2)});
+
+              if(taxable){
+                taxSteps.push(
+                  { chargeable:parseFloat(taxable.toFixed(2)), 
+                    rate:taxRate, 
+                    tax:parseFloat(trancheTax.toFixed(2))
+                  })
+              }
               totalTax += trancheTax;
               taxableIncome -=taxable;
           }
